@@ -1,7 +1,10 @@
-streamlit
-pandas
-numpy
-scikit-learn
-xgboost
-matplotlib
-seaborn
+# Python 3.11
+pandas==3.0.6
+numpy==2.4.6
+scikit-learn==1.9.1
+xgboost==3.2.0
+openpyxl==3.1.5
+matplotlib==3.11.2
+seaborn==0.13.2
+streamlit==1.65.0
+pytest==9.1.1

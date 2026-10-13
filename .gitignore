@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Raw data (download from UCI, see README)
+data/raw/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,38 @@
+{
+  "n_customers": 4338,
+  "n_train": 3036,
+  "n_test": 1302,
+  "risk_counts": {
+    "Medium": 1956,
+    "Low": 1923,
+    "High": 459
+  },
+  "treatment_rate": 0.5016136468418626,
+  "churn_model": {
+    "auc": 0.7593422617446858,
+    "accuracy": 0.7085253456221198,
+    "n_test": 868
+  },
+  "uplift_evaluation": {
+    "qini_area_model": 56.06290042257309,
+    "auuc_model": 109.74345508598194,
+    "qini_area_oracle": 58.91088725574204,
+    "auuc_oracle": 114.44356560339054,
+    "qini_area_random": 40.463020030816644,
+    "auuc_random": 80.67818082714129,
+    "qini_coefficient": 15.599880391756443,
+    "qini_normalized_vs_oracle": 0.8456197240339542,
+    "qini_share_captured": {
+      "top_20pct": 0.3591008041227953,
+      "top_40pct": 0.6665575187422262,
+      "top_60pct": 0.9091052981358928,
+      "top_80pct": 0.9830974720095995
+    },
+    "incremental_responders_total": 80.92604006163329,
+    "rmse_vs_true_uplift": 0.1375095905533827
+  },
+  "uplift_score_range_test": [
+    -0.7639058357603193,
+    0.8851018967899309
+  ]
+}

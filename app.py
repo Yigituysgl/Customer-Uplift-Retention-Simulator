@@ -1,9 +1,16 @@
-import streamlit as st
+from pathlib import Path
+
+import numpy as np
 import pandas as pd
+import streamlit as st
+
+DATA_PATH = Path(__file__).resolve().parent / "data" / "processed" / "uplift_scores_test.csv"
+
 
 @st.cache_data
 def load_data():
-    df = pd.read_csv("C:/Users/yigit/Documents/Customer-Uplift-Retention-Simulator/data/processed/Final_Uplift_Model_Dataset.csv")
+    # Held-out test customers only; produced by simulate.py.
+    df = pd.read_csv(DATA_PATH)
     return df
 
 df = load_data()
@@ -33,10 +40,14 @@ filtered = filtered[filtered["Uplift_Score"] >= uplift_min]
 
 
 st.title("Customer Uplift & Retention Simulator")
+st.caption(
+    "Held-out test customers scored by the T-learner. Treatment and response are "
+    "simulated (see README), so True_Uplift is known."
+)
 
 col1, col2, col3 = st.columns(3)
 with col1:
-    st.metric("Total customers", len(df))
+    st.metric("Test customers", len(df))
 with col2:
     st.metric("Target customers (filtered)", len(filtered))
 with col3:
@@ -49,7 +60,9 @@ st.write("---")
 
 
 st.subheader("Uplift Score Distribution")
-st.bar_chart(df["Uplift_Score"])
+counts, edges = np.histogram(df["Uplift_Score"], bins=40)
+hist = pd.DataFrame({"Uplift_Score": np.round(edges[:-1], 2), "Customers": counts})
+st.bar_chart(hist, x="Uplift_Score", y="Customers")
 
 st.subheader("Top Target Customers (by uplift)")
 top_n = st.slider("Number of customers to show", 10, 200, 50)
@@ -57,7 +70,8 @@ top_customers = filtered.sort_values("Uplift_Score", ascending=False).head(top_n
 
 st.dataframe(
     top_customers[
-        ["CustomerID", "Recency", "Frequency", "Monetary", "Risk", "Churn_Prob", "Uplift_Score"]
+        ["CustomerID", "Recency", "Frequency", "Monetary", "Risk", "Churn_Prob",
+         "True_Uplift", "Uplift_Score"]
     ]
 )
 
